@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 * Task List:
 * 1. When exchange rate is 2:1 exchange rate between CHF and USD, 5 USD + 10 CHF = 10 USD.
 * 2. ~~5 USD * 2 = 10 USD~~
-* 3. Declare 'amount' to private.
+* 3. ~~Declare 'amount' to private.~~
 * 4. ~~Any side effect on the Dollar class?~~
 * 5. Should 'amount' be an integer?
 * 6. ~~equals()*~~
@@ -23,10 +23,8 @@ public class MoneyTest {
     @Test
     public void testMultiplication() {
         Dollar five = new Dollar(5);
-        Dollar product = five.times(2);
-        assertEquals(10, product.amount);
-        product = five.times(3);
-        assertEquals(15, product.amount);
+        assertEquals(new Dollar(10), five.times(2));
+        assertEquals(new Dollar(15), five.times(3));
     }
 
     @Test
