@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 * 9. check any type via equals()*
 * 10. ~~ 5 CHF * 2 = 10 CHF ~~
 * 11. Redundant Design betwen USD Dollar and CHF Franc
-* 12. ** Shared equal() method **
+* 12. ~~ Shared equal() method ~~
 * 13. Shared times() method
 *
 * NOTE:
@@ -35,6 +35,8 @@ public class MoneyTest {
     public void testEquality() {
         assertTrue(new Dollar(5).equals(new Dollar(5)));
         assertFalse(new Dollar(5).equals(new Dollar(6)));
+        assertTrue(new Franc(5).equals(new Franc(5)));
+        assertFalse(new Franc(5).equals(new Franc(6)));
     }
 
     @Test
