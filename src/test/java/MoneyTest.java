@@ -14,11 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 * 8. check null via equals()*
 * 9. check any type via equals()*
 * 10. ~~ 5 CHF * 2 = 10 CHF ~~
-* 11. ** Redundant Design betwen USD Dollar and CHF Franc **
+* 11. Redundant Design betwen USD Dollar and CHF Franc
 * 12. ~~ Shared equal() method ~~
 * 13. Shared times() method
 * 14. ~~ Compare CHF object Franc and USD object Dollar ~~
-* 15. Should we use Currency term?
+* 15. ~~ Should we use Currency term? ~~
 * 16. Should we delete testFrancMultiplication?
 *
 * NOTE:
@@ -48,5 +48,11 @@ public class MoneyTest {
         Money five = Money.franc(5);
         assertEquals(Money.franc(10), five.times(2));
         assertEquals(Money.franc(15), five.times(3));
+    }
+
+    @Test
+    public void testCurrency() {
+        assertEquals("USD", Money.dollar(1).currency());
+        assertEquals("CHF", Money.franc(1).currency());
     }
 }
