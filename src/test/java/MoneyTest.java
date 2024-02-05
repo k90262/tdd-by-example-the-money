@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 * 10. ~~ 5 CHF * 2 = 10 CHF ~~
 * 11. Redundant Design betwen USD Dollar and CHF Franc
 * 12. ~~ Shared equal() method ~~
-* 13. Shared times() method
+* 13. ~~ Shared times() method ~~
 * 14. ~~ Compare CHF object Franc and USD object Dollar ~~
 * 15. ~~ Should we use Currency term? ~~
 * 16. Should we delete testFrancMultiplication?
@@ -54,5 +54,10 @@ public class MoneyTest {
     public void testCurrency() {
         assertEquals("USD", Money.dollar(1).currency());
         assertEquals("CHF", Money.franc(1).currency());
+    }
+
+    @Test
+    public void testDifferentClassEquality() {
+        assertTrue(new Money(10, "CHF").equals(new Franc(10, "CHF")));
     }
 }
