@@ -4,13 +4,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 /*
 * Task List:
-* 1. When exchange rate is 2:1 exchange rate between CHF and USD, 5 USD + 10 CHF = 10 USD.
-* 2. ** 5 USD + 5 USD = 10 USD **
+* - When exchange rate is 2:1 exchange rate between CHF and USD, 5 USD + 10 CHF = 10 USD.
+* - ** 5 USD + 5 USD = 10 USD **
+* - 5 USD + 5 USD should return a Expression object: Sum
+* - ~~Bank.reduce(Money)~~
+* - Reduce Money (with the change feature)
+* - Reduce(Bank, String)
 *
 * NOTE:
 * a. ~~ DONE_ITEM ~~
 * b. ** ON_GOING_ITEM **
-* c. * note: using for design pattern we used on dollor object: value object
 * */
 public class MoneyTest {
     @Test
@@ -40,5 +43,29 @@ public class MoneyTest {
         Bank bank = new Bank();
         Money reduced = bank.reduce(sum, "USD");
         assertEquals(Money.dollar(10), reduced);
+    }
+
+    @Test
+    public void testPlusReturnsSum() {
+        Money five = Money.dollar(5);
+        Expression result = five.plus(five);
+        Sum sum = (Sum) result;
+        assertEquals(five, sum.augend);
+        assertEquals(five, sum.addend);
+    }
+
+    @Test
+    public void testReduceSum() {
+        Expression sum = new Sum(Money.dollar(3), Money.dollar(4));
+        Bank bank = new Bank();
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(7), result);
+    }
+
+    @Test
+    public void testReduceMoney() {
+        Bank bank = new Bank();
+        Money result = bank.reduce(Money.dollar(1), "USD");
+        assertEquals(Money.dollar(1), result);
     }
 }
