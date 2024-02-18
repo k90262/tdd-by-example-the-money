@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 /*
 * Task List:
 * - When exchange rate is 2:1 exchange rate between CHF and USD, 5 USD + 10 CHF = 10 USD.
-* - ** 5 USD + 5 USD = 10 USD **
-* - 5 USD + 5 USD should return a Expression object: Sum
+* - ~~5 USD + 5 USD = 10 USD~~
+* - 5 USD + 5 USD should return a Money object
 * - ~~Bank.reduce(Money)~~
-* - Reduce Money (with the change feature)
-* - Reduce(Bank, String)
+* - ~~educe Money (with the change feature)~~
+* - ~~Reduce(Bank, String)~~
 *
 * NOTE:
 * a. ~~ DONE_ITEM ~~
@@ -67,5 +67,23 @@ public class MoneyTest {
         Bank bank = new Bank();
         Money result = bank.reduce(Money.dollar(1), "USD");
         assertEquals(Money.dollar(1), result);
+    }
+
+    @Test
+    public void testReduceMoneyDifferentCurrency() {
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Money result = bank.reduce(Money.franc(2), "USD");
+        assertEquals(Money.dollar(1), result);
+    }
+
+//    @Test
+//    public void testArrayEquals() {
+//        assertEquals(new Object[] {"abc"}, new Object[] {"abc"});
+//    }
+
+    @Test
+    public void testIdentityRate() {
+        assertEquals(1, new Bank().rate("USD", "USD"));
     }
 }
