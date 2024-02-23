@@ -6,12 +6,12 @@ import static org.junit.jupiter.api.Assertions.*;
 * Task List:
 * - ~~When exchange rate is 2:1 exchange rate between CHF and USD, 5 USD + 10 CHF = 10 USD.~~
 * - ~~5 USD + 5 USD = 10 USD~~
-* - 5 USD + 5 USD should return a Money object
+* - ~~5 USD + 5 USD should return a Money object~~
 * - ~~Bank.reduce(Money)~~
 * - ~~educe Money (with the change feature)~~
 * - ~~Reduce(Bank, String)~~
-* - Sum.plus
-* - Expression.times
+* - ~~Sum.plus~~
+* - ~~Expression.times~~
 *
 * NOTE:
 * a. ~~ DONE_ITEM ~~
@@ -98,4 +98,32 @@ public class MoneyTest {
         Money result = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
         assertEquals(Money.dollar(10), result);
     }
+
+    @Test
+    public void testSumPlusMoney() {
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Expression sum = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(15), result);
+    }
+
+    @Test
+    public void testSumTimes() {
+        Expression fiveBucks = Money.dollar(5);
+        Expression tenFrancs = Money.franc(10);
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD", 2);
+        Expression sum = new Sum(fiveBucks, tenFrancs).times(2);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(20), result);
+    }
+
+//    @Test
+//    public void testPlusSameCurrencyReturnsMoney() {
+//        Expression sum = Money.dollar(1).plus(Money.dollar(1));
+//        assertTrue(sum instanceof Money);
+//    }
 }
